@@ -271,27 +271,27 @@
                 type: 'POST',
                 data: $('#form-add').serialize(),
                 success: function(data) {
-                    // alert('sukses');
-                    // return console.log(data.post);
-                    if (data.response == 'success') {
-                        $('#modal-default').modal('hide');
-                        Swal.fire(
-                            'Sukses!',
-                            'File Kamu Sudah Tersimpan',
-                            'success'
-                        ).then((result) => {
-                            location.reload()
-                        })
-                    } else if (data.response == 'failed') {
-                        if (data.error) {
-                            // toastr["error"](data.error);
-                            Swal.fire('Error', data.error);
-                        }
+                    Swal.fire(data.response,data.message,data.response);
+                    if(data.response == 'success'){
+                        location.reload();
                     }
-                    console.log(data);
+                    // if (data.response == 'success') {
+                    //     $('#modal-default').modal('hide');
+                    //     Swal.fire(
+                    //         'Sukses!',
+                    //         'File Kamu Sudah Tersimpan',
+                    //         'success'
+                    //     ).then((result) => {
+                    //         location.reload()
+                    //     })
+                    // } else if (data.response == 'failed') {
+                    //     if (data.error) {
+                    //         // toastr["error"](data.error);
+                    //         Swal.fire('Error', data.error);
+                    //     }
+                    // }                    
                 },
-                error: function(e) {
-                    console.log(e.responseText);
+                error: function(e) {                    
                     Swal.fire(
                         'Gagal!',
                         'File Kamu Sudah Tersimpan',

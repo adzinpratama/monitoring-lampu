@@ -24,7 +24,7 @@ class Monitoring extends CI_Controller
 	{
 		parent::__construct();
 		$user_session = $this->session->userdata;
-		date_default_timezone_set('Asia/Jakarta');	
+		date_default_timezone_set('Asia/Jakarta');
 
 		if ($this->uri->segment(1) == 'login') {
 			if (isset($user_session) && $user_session = TRUE) {
@@ -36,29 +36,26 @@ class Monitoring extends CI_Controller
 				redirect(site_url('login'));
 			}
 		}
-        $this->load->model('Control_model','control');
+		$this->load->model('Control_model', 'control');
 	}
 	public function index()
 	{
-        $data['lampu'] = $this->control->get('esp')->result();
-        // $data['pintu'] = $this->control->get('aksi',['type'=>'pintu'])->result();
-        $data['page'] = 'cooladmin/monitoring';                
-        
-        // echo json_encode($data['lampu']);
-        // print_r($data['lampu']);
+		$data['page'] = 'cooladmin/monitoring';		
 		$this->load->view('cooladmin/index', $data);
+	}	
+	public function load(){
+		$data['lampu'] = $this->control->get('esp')->result();				
+		$this->load->view('cooladmin/data_monitoring', $data);
 	}
-	public function time_set(){
-		$this->db->select('time_start');
-		$time = $this->db->get('esp')->result();
-		$now = date('Y-m-d H:i:s');
-		foreach ($time as $tm ) {
-			$date = date_create($tm->time_start);
-			echo date_format($date,'H:i:s') .'<br>';
-			// echo date_create() .'<br>';
-			$diff =  date_diff($date,$now);
-			echo $diff->h;
-			// print_r($tm);
+	public function pake($id,$jam,$menit){
+		$this->db->select('penggunaan');
+		$this->db->where('id_data',$id);
+		$penggunaan = $this->db->get('statistik')->row();
+		$now = date('Y-m-d');
+		$this->db->set(['penggunaan'=>serialize(['jam'=>$jam,'menit'=>$menit])]);
+		if(!$penggunaan){
+			$this->db->insert('statistik');
 		}
+		// $this->db->set()
 	}
 }

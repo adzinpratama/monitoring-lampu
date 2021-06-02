@@ -43,10 +43,10 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('cooladmin/login');
         } else {
-            if(!@$user_detail->active){
+            if (!@$user_detail->active) {
                 $this->session->set_flashdata('notif', 'User Non-Aktif Hubungi Admin !!');
                 $this->load->view('cooladmin/login');
-            }else if (@$user_detail->password == crypt($post['password'], @$user_detail->password)) {
+            } else if (@$user_detail->password == crypt($post['password'], @$user_detail->password)) {
                 $login_data = array(
                     'ID' => $user_detail->ID,
                     'username' => $user_detail->username,
@@ -70,7 +70,7 @@ class User extends CI_Controller
             } else if (@$user_detail->password) {
                 $this->session->set_flashdata('notif', 'Password Yang Anda Masukan Salah !!');
                 $this->load->view('cooladmin/login');
-            }else {
+            } else {
                 $this->session->set_flashdata('notif', ' Email Tidak Terdaftar !!');
                 $this->load->view('cooladmin/login');
             }
@@ -93,9 +93,15 @@ class User extends CI_Controller
             'telp' => $post['telp'],
             'active' => '1',
         ];
-
-        $this->User_model->insert($data);
-        echo json_encode(['response' => 'success', 'data' => $data]);
+        try {
+            $this->User_model->insert($data);            
+            $callback['response'] = 'success';
+            $callback['message'] = $data['username'].' Berhasil Ditambahkan';
+        } catch (Exception $e) {
+            $callback['response'] = 'failed';
+            $callback['message'] = $e->getMessage();
+        }
+        echo json_encode($callback);
     }
     public function get()
     {
@@ -108,8 +114,15 @@ class User extends CI_Controller
     public function delete()
     {
         $this->db->where('ID', $this->input->post('id'));
-        $this->db->delete('user');
-        echo json_encode(['status' => 'success']);
+        try {
+            $this->db->delete('user');
+            $callback['response'] = 'success';
+            $callback['message'] = 'User Berhasil Dihapus';
+        } catch (Exception $e) {
+            $callback['response'] = 'failed';
+            $callback['message'] = $e->getMessage();
+        }
+        echo json_encode($callback);
     }
     public function update()
     {
@@ -129,9 +142,16 @@ class User extends CI_Controller
         }
         $this->db->set($data);
         $this->db->where('ID', $this->input->post('id'));
-        $this->db->update('user');
+        try {
+            $this->db->update('user');
+            $callback['response'] = 'success';
+            $callback['message'] = $username.' Berhasil Diupdate';
+        } catch (Exception $e) {
+            $callback['response'] = 'failed';
+            $callback['message'] = $e->getMessage();
+        }
 
-        echo json_encode(['response' => 'success']);
+        echo json_encode($callback);
     }
 
     public function newUser()
@@ -191,13 +211,13 @@ class User extends CI_Controller
     {
         $id = $this->input->post('id');
         $status = $this->input->post('status');
-        $message = $status ? 'Aktif':'Non-Aktif';
+        $message = $status ? 'Aktif' : 'Non-Aktif';
         try {
             $this->db->set(['active' => $status]);
             $this->db->where(['ID' => $id]);
             $this->db->update('user');
             $callback['response'] = 'success';
-            $callback['message'] = 'User Sudah '.$message;
+            $callback['message'] = 'User Sudah ' . $message;
         } catch (\Throwable $th) {
             //throw $th;
             $callback['response'] = 'failed';
