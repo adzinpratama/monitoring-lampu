@@ -77,18 +77,24 @@ class Dashboard extends CI_Controller
 			$send[] = $data;
 		}
 		try {
-			$this->db->insert_batch('statistik',$send);
+			// $this->db->insert_batch('statistik',$send);
 			$callback['response'] = 'success';
 		} catch (Exception $e) {
 			$callback['response'] = $e->getMessage();
 		}
-		echo json_encode($callback);
+		echo json_encode($data);
 		// echo json_encode($send);
 	}
 	public function pake($id){
 		$this->db->where('id_data',$id);
 		$this->db->order_by('waktu','ASC');
-		$this->db->get('statistik')->row();
-		
+		return $this->db->get('statistik')->row();		
+	}
+
+	public function penggunaan(){
+		$dbs = $this->db->get('esp')->result();
+		foreach ($dbs as $db ) {
+			
+		}
 	}
 }
