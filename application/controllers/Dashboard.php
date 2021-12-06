@@ -94,7 +94,8 @@ class Dashboard extends CI_Controller
 	public function penggunaan(){
 		$dbs = $this->db->get('esp')->result();
 		foreach ($dbs as $db ) {
-			
+			$start = $db->time_start;
+			$end = $db->time_end;			
 		}
 	}
 }

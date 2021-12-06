@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql-32425-0.cloudclusters.net:32425',
-	// 'hostname'=>'localhost',
-	'username' => 'admin',
-	'password' => 'c9Erd5gk',
+// 	'hostname' => 'mysql-50017-0.cloudclusters.net:11943',
+	'hostname'=>'localhost',
+	'username' => 'root',
+	'password' => 'admin',
 	// 'password' => '',
 	'database' => 'db_esp',
 	'dbdriver' => 'mysqli',
