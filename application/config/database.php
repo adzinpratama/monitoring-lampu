@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'mysql-50017-0.cloudclusters.net:11943',
+	// 	'hostname' => 'mysql-50017-0.cloudclusters.net:11943',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	// 'password' => 'P8Xw2AOd',
-	'password' => 'admin',
-	'database' => 'db_smarthome',
+	'username' => 'kqrorlgi_hapra',
+	'password' => 'Mkn123siap',
+	// 'password' => '',
+	'database' => 'kqrorlgi_smarthome',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
