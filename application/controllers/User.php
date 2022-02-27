@@ -34,8 +34,8 @@ class User extends CI_Controller
         $post = $this->input->post(NULL, TRUE);
         $this->pass = $this->input->post('password');
 
-        if (isset($post['email'])) {
-            $user_detail = $this->User_model->getLogin(array('username' => $post['email']), array('email' => $post['email']));
+        if (isset($post['username'])) {
+            $user_detail = $this->User_model->getLogin(array('username' => $post['username']), array('username' => $post['username']));
         }
         $this->form_validation->set_message('required', '%s kosong,Tolong diisi !');
         $rules = $this->User_model->rules;

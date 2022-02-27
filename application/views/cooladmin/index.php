@@ -82,10 +82,10 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <!-- <a href="#">
-                    <img src="images/icon/logo.png" alt="Cool Admin" />
-                </a> -->
-                Monitoring Lampu
+                <a>
+                    <img src="<?= base_url('assets/img/poltek.png'); ?>" width="30%" alt="Cool Admin" />
+                    Monitoring Lampu
+                </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">

@@ -52,4 +52,8 @@ class Post extends CI_Controller
         $this->db->get('esp');
         
     }
+    public function coba2(){
+        $this->load->model('Post_model','model');
+        $this->model->update(['data'=>1],0);
+    }
 }

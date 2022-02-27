@@ -7,8 +7,8 @@ class User_model extends CI_Model
 
     public $rules = array(
         'username' => array(
-            'field' => 'email',
-            'label' => 'Email',
+            'field' => 'username',
+            'label' => 'Username',
             'rules' => 'trim|required'
         ),
         'password' => array(

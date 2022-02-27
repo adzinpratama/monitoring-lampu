@@ -28,7 +28,7 @@
 
                 <form action="<?= site_url('login'); ?>" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
